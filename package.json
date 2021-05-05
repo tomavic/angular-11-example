@@ -5,15 +5,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "nlint": "prettier --check .",
-    "format": "prettier --write .",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "prettier --check . && ng lint",
+    "format": "prettier --write .",
     "e2e": "ng e2e"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged",
+      "pre-commit": "pretty-quick --staged && npm run lint && npm run format && npm test",
       "pre-push": "npm test --watch=false --browsers=ChromeHeadless"
     }
   },
@@ -54,6 +53,7 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
+    "tslint-config-prettier": "^1.18.0",
     "typescript": "~4.1.5"
   }
 }
