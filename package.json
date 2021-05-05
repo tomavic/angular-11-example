@@ -6,14 +6,15 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "prettier --check . && ng lint",
+    "prettier:check": "prettier --config .prettierrc --check \"src/**/*.{ts,css,html}\"",
+    "lint": "ng lint",
     "format": "prettier --write .",
     "e2e": "ng e2e"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "pretty-quick --staged && npm run lint && npm run format && npm test",
-      "pre-push": "npm test --watch=false --browsers=ChromeHeadless"
+      "pre-commit": "npm run prettier:check && npm run lint && npm run format && npm test",
+      "pre-push": "npm test --watch=false --browsers=ChromeHeadless && ng build --aot true"
     }
   },
   "lint-staged": {
